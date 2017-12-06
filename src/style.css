@@ -1101,6 +1101,16 @@ section {
     text-decoration: none
 }
 
+.social-logo {
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* msie */
+    width: auto;
+    height: 41px;
+    display: inline-block;
+    vertical-align: bottom;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
 
 /* ------------ 11.5 OWL CAROUSEL MODIFIED ------------ */
 .owl-theme .owl-controls {
@@ -1238,3 +1248,4 @@ section {
         margin: 10px 5px 18px;
     }
 }
+
