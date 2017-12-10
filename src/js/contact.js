@@ -24,7 +24,7 @@ function submitForm(){
     //process remote data
     $.ajax({
         type: "POST",
-        url: "assets/contact/contact.php",
+        url: "contact/contact.php",
         data: "name=" + name + "&email=" + email+ "&phone=" + phone +"&subject=" + subject + "&message=" + message,
         success : function(data){
             if (data === "success"){
