@@ -96,15 +96,6 @@
         time: 2000
     });
 
-    /* ---- Twitter, Change username ---- */
-    $('.tweet').twittie({
-        username: 'envato', // Change username
-        count: 1,
-        dateFormat: '%d/%b/%y',
-        template: '<strong class="date">{{date}}</strong> - {{tweet}} - {{screen_name}} ',
-        apiPath: 'assets/js/api/tweet.php'
-    });
-
     /* ---- Menu Toggle Class ---- */
     $('.menu-holder').on('click', function() {
         $('.menu').toggleClass('menu-active');
@@ -125,7 +116,7 @@
 
         var pTop = $(window).scrollTop();
 
-        if (pTop >= oTop && loop == 0) {
+        if (pTop >= oTop && loop === 0) {
             animateSkill(950);
         }
     });

@@ -6,7 +6,7 @@
 //check the form validation
 $("#contactForm").validator().on('submit', function (event) {
 
-    if($('#form-submit').hasClass('disabled') == false) {
+    if($('#form-submit').hasClass('disabled') === false) {
         event.preventDefault();
         submitForm();
     }
@@ -27,7 +27,7 @@ function submitForm(){
         url: "assets/contact/contact.php",
         data: "name=" + name + "&email=" + email+ "&phone=" + phone +"&subject=" + subject + "&message=" + message,
         success : function(data){
-            if (data == "success"){
+            if (data === "success"){
                 submitMSG('Message has been sent');
             } else {
                 submitMSG(data);

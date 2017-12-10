@@ -1,0 +1,37 @@
+{
+  "name": "francisgrignon-curriculum-vitae",
+  "version": "0.0.1",
+  "description": "Francis Grignon - CV/Personal Portfolio",
+  "author": "Francis Grignon",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrancisGrignon/curriculum-vitae.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FrancisGrignon/curriculum-vitae/issues"
+  },
+  "homepage": "https://github.com/FrancisGrignon/curriculum-vitae#readme",
+  "keywords": [],
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "browserify": "^14.5.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-eslint": "^4.0.0",
+    "gulp-open": "^2.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "eslint": "^4.13.0",
+    "eslint-config": "^0.3.0",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-react": "^7.5.1",
+    "babel-eslint": "^8.0.3",
+    "gulp-uglify": "^3.0.0",
+    "gulp-uglifycss": "^1.0.9",
+    "gulp-minify-html": "^1.0.6"
+  }
+}

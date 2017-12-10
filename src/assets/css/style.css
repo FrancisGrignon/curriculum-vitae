@@ -288,7 +288,7 @@ section {
 
 .header:after {
     content: '';
-    background: url('assets/images/pattern.png');
+    background: url('/images/pattern.png');
     height: 100%;
     width: 100%;
     position: absolute;
@@ -1081,7 +1081,7 @@ section {
 .process li:first-child, 
 .process li:last-child,
 .box-it:before {
-    background: url("assets/images/texture.png");
+    background: url("/images/texture.png");
 }
 
 
