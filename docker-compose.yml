@@ -1,7 +1,6 @@
 version: "0.1"
 services:
   web:
-    container_name: ncis-curriculum-vitae
-    build: docker
+    build: .docker
     ports:
       - 80:80
