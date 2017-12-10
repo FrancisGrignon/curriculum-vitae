@@ -1,8 +1,5 @@
 {
   "root": true,
-  "ecmaFeatures": {
-    "jsx": false
-  },
   "env": {
     "browser": true,
     "node": true,

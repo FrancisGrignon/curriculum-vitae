@@ -4,7 +4,7 @@
 	* Change the email address with your email address
 	*/
 
-	$to = "example@domain.com"; #you will get all mails in this address
+	$to = "contact@ncis.ca"; #you will get all mails in this address
 		
 	/**
 	* @var $name
@@ -34,7 +34,7 @@
 	}
 
 	$subject 	= "{$mailTopic} - [CONTACT]";	#Customize subject here
-	$date 		= gmdate("m/d/Y g:i A");		#Current Date & Time
+	$date 		= gmdate("Y-m-d H:i:s");		#Current Date & Time
 		
 	#Message Body
 	$mailBody = "
