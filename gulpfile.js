@@ -13,6 +13,7 @@ var config = {
     port: 9005,
     devBaseUrl: 'http://localhost',
     paths: {
+        html: './src/*.html',
         js: [
             './src/js/jquery.min.js',
             './src/js/jquery.magnific-popup.min.js',
@@ -42,14 +43,14 @@ var config = {
             './src/css/style.css',
         ],
         css_custom: './src/css/style.css',
-        dist: './src'
+        src: './src'
     }
 }
 
 // Start a local development server
 gulp.task('connect', function () {
     connect.server({
-        root: ['dist'],
+        root: ['src'],
         port: config.port,
         base: config.devBaseUrl,
         livereload: true
@@ -61,11 +62,16 @@ gulp.task('open', ['connect'], function () {
         .pipe(open({ uri: config.devBaseUrl + ':' + config.port + '/' }));
 });
 
+gulp.task('html', function () {
+    gulp.src(config.paths.html)
+        .pipe(connect.reload());
+});
+
 gulp.task('js', function () {
     gulp.src(config.paths.js)
         .pipe(concat('bundle.js'))
         .pipe(uglify())
-        .pipe(gulp.dest(config.paths.dist + '/js'))
+        .pipe(gulp.dest(config.paths.src + '/js'))
         .pipe(connect.reload());
 });
 
@@ -73,7 +79,7 @@ gulp.task('css', function () {
     gulp.src(config.paths.css)
         .pipe(concat('bundle.css'))
         .pipe(uglifycss())
-        .pipe(gulp.dest(config.paths.dist + '/css'))
+        .pipe(gulp.dest(config.paths.src + '/css'))
         .pipe(connect.reload());
 });
 
@@ -89,4 +95,4 @@ gulp.task('watch', function () {
     gulp.watch(config.paths.css_custom, ['css', 'lint']);
 });
 
-gulp.task('default', ['js', 'css', 'lint', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'css', 'lint', 'open', 'watch']);

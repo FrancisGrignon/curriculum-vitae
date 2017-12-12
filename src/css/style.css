@@ -165,7 +165,6 @@ section {
     color: #ececec;
 }
 
-
 /* -------------------------------------
             1. MENU
 * ------------------------------------- */
@@ -717,6 +716,16 @@ section {
     transition: all .25s ease-in;
 }
 
+.section-map {
+    border: 1px solid #aaa;
+    padding: 10px 10px 10px;
+}
+
+.map-holder {
+    position: center;
+    margin: 10px 0 10px;
+}
+
 /* -------------------------------------
             11. EXTRAS
 * ------------------------------------- */
@@ -1211,6 +1220,11 @@ section {
     }
 
     .img-holder {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .map-holder {
         max-width: 350px;
         margin: 0 auto;
     }
