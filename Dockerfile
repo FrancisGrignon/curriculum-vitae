@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y \
 	php5 \
 	libapache2-mod-php5 \
 	git \
+	&& a2enmod php5 \
 	&& rm -rf /var/lib/apt/lists/*
-RUN a2enmod php5
 
 # Clone the web site content
 RUN rm /var/www/html/* -f \
@@ -20,4 +20,4 @@ RUN rm /var/www/html/* -f \
 
 EXPOSE 80
 
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+CMD ["apache2ctl", "-D", "FOREGROUND"] 
