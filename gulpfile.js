@@ -1,6 +1,7 @@
 "use strict";
 
 var gulp = require('gulp');
+var util = require('gulp-util');
 var connect = require('gulp-connect'); // Runs a local dev server
 var open = require('gulp-open'); // Open a URL in a web browser
 var source = require('vinyl-source-stream'); // Use conventional text streams with Gulp
@@ -14,6 +15,8 @@ var config = {
     devBaseUrl: 'http://localhost',
     paths: {
         html: './src/*.html',
+        images: './src/images/*',
+        fonts: './src/fonts/*',
         js: [
             './src/js/jquery.min.js',
             './src/js/jquery.magnific-popup.min.js',
@@ -26,12 +29,10 @@ var config = {
             './src/js/smoothscroll.js',
             './src/js/jquery.nav.js',
             './src/js/validator.min.js',
-            './src/js/script.js',
-            './src/js/contact.js'
+            './src/js/script.js'
         ],
         js_custom: [
-            './src/js/script.js',
-            './src/js/contact.js'
+            './src/js/script.js'
         ],
         css: [
             './src/css/bootstrap.min.css',
@@ -43,14 +44,15 @@ var config = {
             './src/css/style.css',
         ],
         css_custom: './src/css/style.css',
-        src: './src'
-    }
+        dist: './dist'
+    },
+    production: !!util.env.production
 }
 
 // Start a local development server
 gulp.task('connect', function () {
     connect.server({
-        root: ['src'],
+        root: ['dist'],
         port: config.port,
         base: config.devBaseUrl,
         livereload: true
@@ -58,12 +60,25 @@ gulp.task('connect', function () {
 });
 
 gulp.task('open', ['connect'], function () {
-    gulp.src('src/index.html')
+    gulp.src('dist/index.html')
         .pipe(open({ uri: config.devBaseUrl + ':' + config.port + '/' }));
 });
 
 gulp.task('html', function () {
     gulp.src(config.paths.html)
+        .pipe(gulp.dest(config.paths.dist))
+        .pipe(connect.reload());
+});
+
+gulp.task('images', function () {
+    gulp.src(config.paths.images)
+        .pipe(gulp.dest(config.paths.dist + '/images'))
+        .pipe(connect.reload());
+});
+
+gulp.task('fonts', function () {
+    gulp.src(config.paths.fonts)
+        .pipe(gulp.dest(config.paths.dist + '/fonts'))
         .pipe(connect.reload());
 });
 
@@ -71,7 +86,7 @@ gulp.task('js', function () {
     gulp.src(config.paths.js)
         .pipe(concat('bundle.js'))
         .pipe(uglify())
-        .pipe(gulp.dest(config.paths.src + '/js'))
+        .pipe(gulp.dest(config.paths.dist + '/js'))
         .pipe(connect.reload());
 });
 
@@ -79,7 +94,7 @@ gulp.task('css', function () {
     gulp.src(config.paths.css)
         .pipe(concat('bundle.css'))
         .pipe(uglifycss())
-        .pipe(gulp.dest(config.paths.src + '/css'))
+        .pipe(gulp.dest(config.paths.dist + '/css'))
         .pipe(connect.reload());
 });
 
@@ -95,4 +110,9 @@ gulp.task('watch', function () {
     gulp.watch(config.paths.css_custom, ['css', 'lint']);
 });
 
-gulp.task('default', ['html', 'js', 'css', 'lint', 'open', 'watch']);
+if (config.production) {
+    gulp.task('default', ['html', 'fonts', 'images', 'js', 'css', 'lint']);
+}
+else {
+    gulp.task('default', ['html', 'fonts', 'images', 'js', 'css', 'lint', 'open', 'watch']);
+}
