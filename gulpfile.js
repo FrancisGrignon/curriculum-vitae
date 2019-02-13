@@ -4,7 +4,6 @@ var gulp = require('gulp');
 var util = require('gulp-util');
 var connect = require('gulp-connect'); // Runs a local dev server
 var open = require('gulp-open'); // Open a URL in a web browser
-var source = require('vinyl-source-stream'); // Use conventional text streams with Gulp
 var concat = require('gulp-concat'); // Concatenates files
 var lint = require('gulp-eslint'); // Lint JS files
 var uglify = require('gulp-uglify'); // Minify js
@@ -51,7 +50,7 @@ var config = {
 
 // Start a local development server
 gulp.task('connect', function () {
-    connect.server({
+    return connect.server({
         root: ['dist'],
         port: config.port,
         base: config.devBaseUrl,
@@ -59,43 +58,38 @@ gulp.task('connect', function () {
     });
 });
 
-gulp.task('open', ['connect'], function () {
-    gulp.src('dist/index.html')
+gulp.task('open', function () {
+    return gulp.src('dist/index.html')
         .pipe(open({ uri: config.devBaseUrl + ':' + config.port + '/' }));
 });
 
 gulp.task('html', function () {
-    gulp.src(config.paths.html)
+    return gulp.src(config.paths.html)
         .pipe(gulp.dest(config.paths.dist))
-        .pipe(connect.reload());
 });
 
 gulp.task('images', function () {
-    gulp.src(config.paths.images)
+    return gulp.src(config.paths.images)
         .pipe(gulp.dest(config.paths.dist + '/images'))
-        .pipe(connect.reload());
 });
 
 gulp.task('fonts', function () {
-    gulp.src(config.paths.fonts)
+    return gulp.src(config.paths.fonts)
         .pipe(gulp.dest(config.paths.dist + '/fonts'))
-        .pipe(connect.reload());
 });
 
 gulp.task('js', function () {
-    gulp.src(config.paths.js)
+    return gulp.src(config.paths.js)
         .pipe(concat('bundle.js'))
         .pipe(uglify())
         .pipe(gulp.dest(config.paths.dist + '/js'))
-        .pipe(connect.reload());
 });
 
 gulp.task('css', function () {
-    gulp.src(config.paths.css)
+    return gulp.src(config.paths.css)
         .pipe(concat('bundle.css'))
         .pipe(uglifycss())
         .pipe(gulp.dest(config.paths.dist + '/css'))
-        .pipe(connect.reload());
 });
 
 gulp.task('lint', function () {
@@ -104,15 +98,15 @@ gulp.task('lint', function () {
         .pipe(lint.format());
 });
 
+gulp.task('build', gulp.parallel('html', 'fonts', 'images', 'js', 'css'));
+
 gulp.task('watch', function () {
-    gulp.watch(config.paths.html, ['html']);
-    gulp.watch(config.paths.js_custom, ['js', 'lint']);
-    gulp.watch(config.paths.css_custom, ['css', 'lint']);
+    gulp.watch([config.paths.html, config.paths.js, config.paths.css], gulp.series('build', 'lint', connect.reload()));
 });
 
 if (config.production) {
-    gulp.task('default', ['html', 'fonts', 'images', 'js', 'css', 'lint']);
+    gulp.task('default', gulp.series('build', 'lint'));
 }
 else {
-    gulp.task('default', ['html', 'fonts', 'images', 'js', 'css', 'lint', 'open', 'watch']);
+    gulp.task('default', gulp.series('build', 'lint', 'connect', 'open', 'watch'));
 }
