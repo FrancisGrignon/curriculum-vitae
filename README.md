@@ -2,7 +2,7 @@
 CV / Personal Portfolio
 http://grignon.azurewebsites.net/
 
-A simple prove of concept, featuring my cv, on how to build a static web site, store it in a docker container and run it.
+A simple prove of concept, featuring my curriculum vitae, on how to build a static web site, store it in a docker container and run it.
 
 To build the site.
 

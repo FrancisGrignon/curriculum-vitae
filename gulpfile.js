@@ -8,6 +8,7 @@ var concat = require('gulp-concat'); // Concatenates files
 var lint = require('gulp-eslint'); // Lint JS files
 var uglify = require('gulp-uglify'); // Minify js
 var uglifycss = require('gulp-uglifycss'); // Minify css
+var htmlmin = require('gulp-htmlmin'); // Minify html
 
 var config = {
     port: 9005,
@@ -65,6 +66,7 @@ gulp.task('open', function () {
 
 gulp.task('html', function () {
     return gulp.src(config.paths.html)
+        .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(gulp.dest(config.paths.dist))
 });
 

@@ -9,8 +9,18 @@ RUN npm install -g gulp
 RUN gulp --production
 
 # Publish environment
-FROM debian:jessie
-LABEL maintainer Francis Grignon <contact@ncis.ca>
+FROM debian:buster-slim
+
+ARG BUILD_DATE
+ARG BUILD_VERSION
+
+LABEL org.label-schema.build-date = $BUILD_DATE \
+      org.label-schema.name = "grignon/curriculum-vitae" \
+      org.label-schema.description = "A simple prove of concept, featuring my curriculum vitae, on how to build a static web site, store it in a docker container and run it." \
+ 	  org.label-schema.url = "http://grignon.azurewebsites.net/" \
+	  org.label-schema.vcs-url = "https://github.com/francisgrignon/curriculum-vitae" \
+	  org.label-schema.schema-version = $BUILD_VERSION \
+	  org.label-schema.docker.cmd = "docker run -d -p 80:80 grignon/curriculum-vitae"
 
 WORKDIR /tmp
 
