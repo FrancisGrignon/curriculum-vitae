@@ -10,7 +10,7 @@ To build the site.
 2. Download the reporitory, https://github.com/FrancisGrignon/curriculum-vitae.git
 3. Open a command line and cd to the root of the repository.
 4. `npm install` - Install the required packages.
-5. `gulp` - To built the project and start a live server.
+5. `gulp watch` - To built the project and start a live server.
 
 To build the docker image and run it.
 
