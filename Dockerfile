@@ -6,7 +6,7 @@ WORKDIR /src
 COPY . .
 RUN npm install
 RUN npm install -g gulp
-RUN gulp --production
+RUN gulp build
 
 # Publish environment
 FROM debian:buster-slim

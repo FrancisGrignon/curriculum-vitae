@@ -69,7 +69,7 @@ function css() {
         .pipe(order([
             'vendor/*.css',
             'style.css'
-        ]))    
+        ]))
         .pipe(concat('bundle.css'))
         .pipe(uglifycss().on('error', function(e) {
             console.log(e);
@@ -92,5 +92,5 @@ function watchFiles() {
 const build = parallel(html, css, series(lint, js), fonts, images);
 const watching = parallel(watchFiles, connect);
 
-exports.default = build;
-exports.watch = series(build, watching);
+exports.build = build;
+exports.default = series(build, watching);
