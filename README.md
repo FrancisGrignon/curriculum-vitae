@@ -17,5 +17,5 @@ To build the docker image and run it.
 1. Install [Docker](https://docs.docker.com/engine/installation/)
 2. Open a command line and cd to the root of the repository.
 3. `docker build -t grignon/curriculum-vitae .` - Built the image
-4. `docker run -p 80:80 grignon/curriculum-vitae` - Run the container
+4. `docker run -p 80:80 --rm -it grignon/curriculum-vitae` - Run the container
 5. Open your web browser on http://localhost/
